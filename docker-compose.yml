@@ -1,0 +1,66 @@
+version: '2'
+
+networks:
+  ssrf_v:
+    ipam:
+      config:
+        - subnet: 172.72.0.0/16
+          gateway: 172.72.23.1
+
+services: 
+  ssrfweb1:
+    image: selectarget/ssrf_web:v1
+    ports:
+    - 8080:80
+    networks:
+      ssrf_v: 
+        ipv4_address: 172.72.23.21
+ 
+  ssrfweb2: 
+    image: selectarget/ssrf_codesec:v2
+    networks: 
+      ssrf_v:
+        ipv4_address: 172.72.23.22
+
+  ssrfweb3:
+    image: selectarget/ssrf_sql:v3
+    networks:
+      ssrf_v:
+        ipv4_address: 172.72.23.23
+
+  ssrfweb4:
+    image: selectarget/ssrf_commandexec:v4
+    networks:
+      ssrf_v:
+        ipv4_address: 172.72.23.24
+
+  ssrfweb5:
+    image: selectarget/ssrf_xxe:v5
+    networks:
+      ssrf_v:
+        ipv4_address: 172.72.23.25
+
+  ssrfweb6:
+    image: selectarget/ssrf_tomcat:v6
+    networks:
+      ssrf_v:
+        ipv4_address: 172.72.23.26
+
+  ssrfweb7:
+    image: selectarget/ssrf_redisunauth:v7
+    networks:
+      ssrf_v:
+        ipv4_address: 172.72.23.27
+          
+  ssrfweb8:
+    image: selectarget/ssrf_redisauth:v8
+    networks:
+      ssrf_v:
+        ipv4_address: 172.72.23.28
+
+  ssrfweb9:
+    image: selectarget/ssrf_mysql:v9
+    networks:
+      ssrf_v:
+        ipv4_address: 172.72.23.29
+
